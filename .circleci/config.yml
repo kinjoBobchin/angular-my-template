@@ -1,27 +1,16 @@
-workflows:
-  version: 2
-  build-deploy:
-    jobs:
-      - build
-      - deploy:
-          requires:
-            - build
-          filters:
-            branches:
-              only: stage
-
 version: 2
 jobs:
   build:
     docker:
       - image: circleci/node:8.10.0
 
+    working_directory: ~/timestamp-app
+
     steps:
       - checkout
-      - run:
-          name: Install Angular Apps and Dependencies
-          command: |
-            yarn install
+      - run: yarn install
+      # - run: yarn test
+
   deploy:
     steps:
       - checkout
