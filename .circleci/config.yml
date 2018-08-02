@@ -4,8 +4,12 @@ jobs:
     docker:
       - image: circleci/node:8.10.0
 
+    working_directory: ~/timestamp-app
+
     steps:
       - checkout
+      - run: yarn install
+      - run: yarn test
 
     deployment:
       staging:
