@@ -7,9 +7,8 @@ jobs:
     steps:
       - checkout
 
-      - deploy:
-          name: Deploy Master to Heroku
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "staging" ]; then
-              git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME_DEV.git staging
-            fi
+      - deployment:
+          staging:
+            branch: staging
+            heroku:
+              appname: timestamp-app-dev
