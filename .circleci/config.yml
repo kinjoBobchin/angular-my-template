@@ -7,8 +7,8 @@ jobs:
     steps:
       - checkout
 
-      - deployment:
-          staging:
-            branch: staging
-            heroku:
-              appname: timestamp-app-dev
+    deployment:
+      staging:
+        branch: staging
+        heroku:
+          appname: timestamp-app-dev
