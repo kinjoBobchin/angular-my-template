@@ -1,19 +1,64 @@
+defaults: &defaults
+  working_directory: ~/timestamp-app
+  # environment:
+  #   TZ: "/usr/share/zoneinfo/Asia/Tokyo"
+
+deploy: &deploy
+  <<: *defaults
+  machine:
+      enabled: true
+  steps:
+    - checkout
+    - run:
+        name: Setup Heroku
+        command: bash .circleci/setup-heroku.sh # 後述
+    - run:
+        command: |
+          git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME_DEV.git HEAD:refs/heads/staging
+          # 他デプロイに必要なタスクがあれば記載
+          sleep 5  # sleep for 5 seconds to wait for dynos
+          heroku restart --app $HEROKU_APP_NAME
+
 version: 2
 jobs:
-  build:
+  test:
+    <<: *defaults
     docker:
       - image: circleci/node:8.10.0
 
-    working_directory: ~/timestamp-app
+  deploy_to_heroku_prod:
+    <<: *deploy
+    environment:
+      HEROKU_APP_NAME_PROD: "timestamp-app-prod" #　本番のapp_nameを設定
 
-    steps:
-      - checkout
-      - run: yarn install
-      # - run: yarn test
-  deploy:
-    steps:
-      - checkout
-      - run:
-        name: Deploy Staging to Heroku
-        command: |
-          git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME_DEV.git master
+  deploy_to_heroku_staging:
+    <<: *deploy
+    environment:
+      HEROKU_APP_NAME_DEV: "timestamp-app-dev" #stg環境ののapp_nameを設定
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - test:
+          filters:
+            branches:
+              only: /.*/
+            tags:
+              only: /.*/
+      - deploy_to_heroku:
+          requires:
+            - test
+          filters:
+            branches:
+              only: production
+            tags:
+              only: /^prod_v_[0-9](\.[0-9]){2}$/
+      - deploy_to_heroku_staging:
+          requires:
+            - test
+          filters:
+            branches:
+              only: staging
+            tags:
+              only: /^stg_v_[0-9](\.[0-9]){2}$/
