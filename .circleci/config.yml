@@ -26,12 +26,12 @@ workflows:
   version: 2
   jobs:
     - master_jobs:
-      filters:
-        branches:
-          only: master
       - build
       - deployment
       - unit-test
+        filters:
+          branches:
+            only: master
     - production_jobs:
       filters:
         branches:
