@@ -1,43 +1,42 @@
 version: 2
 jobs:
-
-  build:
+  master_jobs:
     docker:
       - image: circleci/node:8.10.0
     steps:
       - checkout
       - run: echo "yarn install"
-      - run: echo "yarn build --prod"
-
-  deployment:
+      - run: echo "yarn test"
+      - run: bash ./hello.sh
+  production_jobs:
     docker:
       - image: circleci/node:8.10.0
     steps:
       - checkout
-      - run: echo "Deployment To Heroku deploy shell"
-        commmand: bash ./hello.sh
+      - run: echo "production jobs start"
+      - run: echo "production jobs doing"
+      - run: echo "production jobs done"
 
-  unit-test:
+  staging_jobs:
     docker:
       - image: circleci/node8.10.0
     steps:
       - checkout
-      - run: echo "do yarn test but dont' watch mode"
-        requires:
-          - build
+      - run: echo "staging jobs start"
+      - run: echo "staging jobs doing"
+      - run: echo "staging jobs done"
 workflows:
   version: 2
   jobs:
     - master_jobs:
-      unit-test:
-        filters:
-          branches:
-            only: master
-    - production_jobs:
-      filters:
+      require:
+        branches:
+          only: master
+    - production_jobs
+      require:
         branches:
           only: production
-    - staging_jobs:
-      filters:
+    - staging_jobs
+      require:
         branches:
           only: staging
