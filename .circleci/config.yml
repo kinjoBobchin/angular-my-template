@@ -7,6 +7,6 @@ jobs:
       - checkout
       # - run: yarn install
       - run: echo "yarn install done"
-        command: /hello.sh
+        command: ./hello.sh
       # - run: yarn build --prod
 
