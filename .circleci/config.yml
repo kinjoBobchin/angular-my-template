@@ -22,6 +22,7 @@ jobs:
         requires:
           - build
       - run: echo "do yarn test but dont' watch mode"
+
 workflows:
   version: 2
   jobs:
