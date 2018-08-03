@@ -41,14 +41,12 @@ workflows:
           filters:
             branches:
               only: staging
-
   production_jobs:
     jobs:
       - run: echo "production_jobs"
         filters:
           branches:
             only: production
-
   master_jobs:
     jobs:
       - test
