@@ -7,6 +7,18 @@ jobs:
       - checkout
       # - run: yarn install
       - run: echo "yarn install done"
-        command: bash ./hello.sh
       # - run: yarn build --prod
 
+  deploy:
+    docker:
+      - image: circleci/node:8.10.0
+      steps:
+        - checkout
+        - run: echo "deployment session"
+          command: bash ./hello.sh
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build
+      - deploy
