@@ -26,8 +26,6 @@ workflows:
   version: 2
   jobs:
     - master_jobs:
-      - build
-      - deployment
       - unit-test:
         filters:
           branches:
