@@ -1,56 +1,22 @@
-defaults: &defaults
-  working_directory: ~/timestamp-app
-  docker:
-    - image: circleci/node:8.10.0
-
 version: 2
 jobs:
-  install_package:
-    <<: *defaults
+  build:
+    docker:
+      - image: circleci/node:8.10.0
     steps:
       - checkout
       - run: echo "yarn install"
-
-  build:
-    <<: *defaults
-    steps:
-      - checkout
       - run: echo "yarn build --prod"
-
   deployment:
-    <<: *defaults
+    docker:
+      - image: circleci/node:8.10.0
     steps:
       - checkout
       - run: echo "Deployment To Heroku"
         commmand: bash ./hello.sh
-
-  test:
-    <<: *defaults
-    steps:
-      - checkout
-      - run: echo "yarn test"
-
 workflows:
   version: 2
-  staging_jobs:
+  build_and_deployment:
     jobs:
       - build
-      - deployment:
-          requires:
-            - build
-          filters:
-            branches:
-              only: staging
-  production_jobs:
-    jobs:
-      - run: echo "production_jobs"
-        filters:
-          branches:
-            only: production
-  master_jobs:
-    jobs:
-      - test
-      - run: echo "staging_jobs"
-        filters:
-          branches:
-            only: master
+      - deployment
