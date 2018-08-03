@@ -28,7 +28,7 @@ workflows:
     - master_jobs:
       - build
       - deployment
-      - unit-test
+      - unit-test:
         filters:
           branches:
             only: master
