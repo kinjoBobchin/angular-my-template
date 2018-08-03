@@ -14,7 +14,6 @@ jobs:
       - checkout
       - run: echo "Deployment To Heroku deploy shell"
         commmand: bash ./hello.sh
-
   unit-test:
     docker:
       - image: circleci/node8.10.0
