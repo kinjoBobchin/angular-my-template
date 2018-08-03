@@ -27,16 +27,17 @@ jobs:
       - run: echo "staging jobs done"
 workflows:
   version: 2
-  jobs:
-    - master_jobs:
-      filters:
-        branches:
-          only: master
-    - production_jobs:
-      filters:
-        branches:
-          only: production
-    - staging_jobs:
-      filters:
-        branches:
-          only: staging
+  build-test-deploy-except-master:
+    jobs:
+      - master_jobs:
+        filters:
+          branches:
+            only: master
+      - production_jobs:
+        filters:
+          branches:
+            only: production
+      - staging_jobs:
+        filters:
+          branches:
+            only: staging
