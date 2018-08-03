@@ -19,10 +19,9 @@ jobs:
       - image: circleci/node8.10.0
     steps:
       - checkout
+      - run: echo "do yarn test but dont' watch mode"
         requires:
           - build
-      - run: echo "do yarn test but dont' watch mode"
-
 workflows:
   version: 2
   jobs:
