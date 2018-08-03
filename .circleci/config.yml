@@ -1,5 +1,6 @@
 version: 2
 jobs:
+
   build:
     docker:
       - image: circleci/node:8.10.0
@@ -7,6 +8,7 @@ jobs:
       - checkout
       - run: echo "yarn install"
       - run: echo "yarn build --prod"
+
   deployment:
     docker:
       - image: circleci/node:8.10.0
@@ -14,6 +16,7 @@ jobs:
       - checkout
       - run: echo "Deployment To Heroku deploy shell"
         commmand: bash ./hello.sh
+
   unit-test:
     docker:
       - image: circleci/node8.10.0
@@ -26,7 +29,7 @@ workflows:
   version: 2
   jobs:
     - master_jobs:
-      - unit-test:
+      unit-test:
         filters:
           branches:
             only: master
