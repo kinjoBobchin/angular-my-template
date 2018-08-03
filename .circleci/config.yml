@@ -3,30 +3,7 @@ jobs:
   build:
     docker:
       - image: circleci/node:8.10.0
-      - restore_cache:
-        key: dependency-cache-{{ checksum "package.json" }}
     steps:
       - checkout
       - run: yarn install
       - run: ng build --prod
-
-#   deploy:
-#     docker:
-#       - image: circleci/node:8.10.0
-#     machine:
-#       enabled: true
-#     steps:
-#       - checkout
-#       - run:
-#         command: ./hello.sh
-
-# workflows:
-#   version: 2
-#   build_and_deploy:
-#     jobs:
-#       - build
-#         requires:
-#           - build
-#         filters:
-#           branches:
-#             only: staging
