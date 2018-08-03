@@ -29,14 +29,14 @@ workflows:
   version: 2
   jobs:
     - master_jobs:
-      requires:
+      filters:
         branches:
           only: master
     - production_jobs:
-      requires:
+      filters:
         branches:
           only: production
     - staging_jobs:
-      requires:
+      filters:
         branches:
           only: staging
