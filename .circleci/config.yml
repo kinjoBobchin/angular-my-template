@@ -32,11 +32,13 @@ workflows:
       require:
         branches:
           only: master
-    - production_jobs
+
+    - production_jobs:
       require:
         branches:
           only: production
-    - staging_jobs
+
+    - staging_jobs:
       require:
         branches:
           only: staging
