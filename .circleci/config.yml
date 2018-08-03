@@ -1,31 +1,58 @@
+defaults: &defaults
+  working_directory: ~/timestamp-app
+  docker:
+    - image: circleci/node:8.10.0
+
 version: 2
 jobs:
-  build:
-    docker:
-      - image: circleci/node:8.10.0
-      - restore_cache:
-        key: dependency-cache-{{ checksum "package.json" }}
+  install_package:
+    <<: *defaults
     steps:
       - checkout
-      - run: yarn install
-      - run: ng build --prod
+      - run: echo "yarn install"
 
-  deploy:
-    docker:
-      - image: circleci/node:8.10.0
-    machine:
-      enabled: true
+  build:
+    <<: *defaults
     steps:
       - checkout
-      - run:
-        command: ./hello.sh
+      - run: echo "yarn build --prod"
+
+  deployment:
+    <<: *defaults
+    steps:
+      - checkout
+      - run: echo "Deployment To Heroku"
+        commmand: bash ./hello.sh
+
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+      - run: echo "yarn test"
+
 workflows:
   version: 2
-  build_and_deploy:
+  staging_jobs:
     jobs:
       - build
-        requires:
-          - build
+      - deployment:
+          requires:
+            - build
+          filters:
+            branches:
+              only: staging
+
+  production_jobs:
+    jobs:
+      - run: echo "production_jobs"
         filters:
           branches:
-            only: staging
+            only: production
+
+  master_jobs:
+    jobs:
+      - test
+      - run: echo "staging_jobs"
+        filters:
+          branches:
+            only: master
