@@ -8,6 +8,7 @@ jobs:
       - run: echo "yarn install"
       - run: echo "yarn test"
       - run: bash ./hello.sh
+
   production_jobs:
     docker:
       - image: circleci/node:8.10.0
@@ -19,7 +20,7 @@ jobs:
 
   staging_jobs:
     docker:
-      - image: circleci/node8.10.0
+      - image: circleci/node:8.10.0
     steps:
       - checkout
       - run: echo "staging jobs start"
