@@ -19,6 +19,8 @@ jobs:
       - image: circleci/node8.10.0
     steps:
       - checkout
+        requires:
+          - build
       - run: echo "do yarn test but dont' watch mode"
 workflows:
   version: 2
@@ -27,9 +29,9 @@ workflows:
       filters:
         branches:
           only: master
-      - run: echo "master_job a"
-      - run: echo "master_job b"
-      - run: echo "master_job c"
+      - build
+      - deployment
+      - unit-test
     - production_jobs:
       filters:
         branches:
