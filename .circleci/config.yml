@@ -3,18 +3,29 @@ jobs:
   build:
     docker:
       - image: circleci/node:8.10.0
-
-    working_directory: ~/timestamp-app
-
+      - restore_cache:
+        key: dependency-cache-{{ checksum "package.json" }}
     steps:
       - checkout
       - run: yarn install
-      # - run: yarn test
+      - run: ng build --prod
 
   deploy:
+    docker:
+      - image: circleci/node:8.10.0
+    machine:
+      enabled: true
     steps:
       - checkout
       - run:
-          name: Deploy Staging to Heroku
-          command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME_DEV.git staging
+        command: ./hello.sh
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build
+        requires:
+          - build
+        filters:
+          branches:
+            only: staging
