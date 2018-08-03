@@ -22,8 +22,19 @@ jobs:
       - run: echo "do yarn test but dont' watch mode"
 workflows:
   version: 2
-  build_and_deployment_test:
-    jobs:
-      - build
-      - deployment
-      - unit-test
+  jobs:
+    - master_jobs:
+      filters:
+        branches:
+          only: master
+      - run: echo "master_job a"
+      - run: echo "master_job b"
+      - run: echo "master_job c"
+    - production_jobs:
+      filters:
+        branches:
+          only: production
+    - staging_jobs:
+      filters:
+        branches:
+          only: staging
