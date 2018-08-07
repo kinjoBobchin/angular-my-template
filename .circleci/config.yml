@@ -17,17 +17,16 @@ jobs:
       - run: echo "yarn test"
       - run: echo "yarn build --prod"
       - run: git tag prod_v_201808071200
-      - run: echo "bash deploy-prod.sh"
+      - run: ./deploy-prod.sh
   staging_jobs:
     docker:
       - image: circleci/node:8.11-browsers
     steps:
       - checkout
-      - run: echo "yarn install"
-      - run: echo "yarn test"
-      - run: echo "yarn build --prod"
+      - run: yarn install
+      - run: yarn build --prod
       - run: git tag stg_v_201808071200
-      - run: echo "bash deploy-dev.sh"
+      - run: ./deploy-dev.sh
 
 workflows:
   version: 2
