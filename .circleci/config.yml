@@ -16,7 +16,7 @@ jobs:
       - run: echo "yarn install"
       - run: echo "yarn test"
       - run: echo "yarn build --prod"
-      - run: echo "bash ./deploy-prod.sh"
+      - run: bash ./deploy-prod.sh
   staging_jobs:
     docker:
       - image: circleci/node8.10.0
