@@ -1,6 +1,7 @@
 version: 2
 jobs:
   build-jobs:
+    working_directory: ~/timestamp-app
     environment:
       TZ: Asia/Tokyo
     docker:
@@ -17,26 +18,47 @@ jobs:
           key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+  test-jobs:
+    working_directory: ~/timestamp-app
+    docker:
+      - image: circleci/node:8.11-browsers
+    steps:
+      - attach_workspace:
+          at: .
       - run: yarn test
 
   master_jobs:
+    working_directory: ~/timestamp-app
     docker:
       - image: circleci/node:8.11-browsers
     steps:
       - checkout
       - run: ./hello.sh
   production_jobs:
+    working_directory: ~/timestamp-app
     docker:
       - image: circleci/node:8.11-browsers
     steps:
       - checkout
-      - run: echo "yarn build --prod"
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run: yarn build --prod
       - run: ./deploy-prod.sh
   staging_jobs:
     docker:
       - image: circleci/node:8.11-browsers
     steps:
       - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
       - run: yarn build --prod
       - run: ./deploy-dev.sh
 
@@ -45,6 +67,9 @@ workflows:
   build-test-deploy-except-master:
     jobs:
       - build-jobs
+      - test-jobs:
+          requires:
+            - build-jobs
       - master_jobs:
           requires:
             - build-jobs
@@ -52,10 +77,14 @@ workflows:
             branches:
               only: master
       - production_jobs:
+          requires:
+            - build-jobs
           filters:
             branches:
               only: production
       - staging_jobs:
+          requires:
+            - build-jobs
           filters:
             branches:
               only: staging
