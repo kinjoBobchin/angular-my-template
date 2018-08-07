@@ -16,7 +16,7 @@ jobs:
       - run: echo "yarn install"
       - run: echo "yarn test"
       - run: echo "yarn build --prod"
-      - run: git tag prod_v_201808071200 && git push master --tags
+      - run: git tag prod_v_201808071200 && git push origin --tags
       - run: echo "bash deploy-prod.sh"
   staging_jobs:
     docker:
@@ -26,7 +26,7 @@ jobs:
       - run: echo "yarn install"
       - run: echo "yarn test"
       - run: echo "yarn build --prod"
-      - run: git tag stg_v_201808071200 && git push master --tags
+      - run: git tag stg_v_201808071200 && git push origin --tags
       - run: echo "bash deploy-dev.sh"
 
 workflows:
