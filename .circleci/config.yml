@@ -8,7 +8,6 @@ jobs:
       - run: echo "yarn install"
       - run: echo "yarn test"
       - run: ./hello.sh
-      - run: ./hello.sh
   production_jobs:
     docker:
       - image: circleci/node:8.10.0
