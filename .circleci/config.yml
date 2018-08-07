@@ -1,1 +1,47 @@
+version: 2
+jobs:
+  master_jobs:
+    docker:
+      - image: circleci/node:8.10.0
+    steps:
+      - checkout
+      - run: echo "yarn install"
+      - run: echo "yarn test"
+      - run: ./hello.sh
+  production_jobs:
+    docker:
+      - image: circleci/node:8.10.0
+    steps:
+      - checkout
+      - run: echo "yarn install"
+      - run: echo "yarn test"
+      - run: echo "yarn build --prod"
+      - run: git tag prod_v_201808071200
+      - run: echo "bash deploy-prod.sh"
+  staging_jobs:
+    docker:
+      - image: circleci/node8.10.0
+    steps:
+      - checkout
+      - run: echo "yarn install"
+      - run: echo "yarn test"
+      - run: echo "yarn build --prod"
+      - run: git tag stg_v_201808071200
+      - run: echo "bash deploy-dev.sh"
 
+workflows:
+  version: 2
+  build-test-deploy-except-master:
+    jobs:
+      - master_jobs:
+          filters:
+            branches:
+              only: master
+      - production_jobs:
+          filters:
+            branches:
+              only: production
+      - staging_jobs:
+          filters:
+            branches:
+              only: staging
