@@ -13,6 +13,7 @@ jobs:
           keys:
             - yarn-packages-{{ checksum "yarn.lock" }}
       - run: yarn install
+      - run: yarn build --prod
       - save_cache:
           name: Save Yarn Package Cache
           key: yarn-packages-{{ checksum "yarn.lock" }}
@@ -48,7 +49,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
-      - run: yarn build --prod
+      - run: yarn test
       - run: ./deploy-prod.sh
   staging_jobs:
     docker:
@@ -57,7 +58,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
-      - run: yarn build --prod
+      - run: yarn test
       - run: ./deploy-dev.sh
 
 workflows:
