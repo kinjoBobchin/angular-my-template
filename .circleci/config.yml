@@ -30,13 +30,21 @@ jobs:
       - image: circleci/node:8.11-browsers
     steps:
       - checkout
-      - run: echo "yarn build --prod"
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run: yarn build --prod
       - run: ./deploy-prod.sh
   staging_jobs:
     docker:
       - image: circleci/node:8.11-browsers
     steps:
       - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
       - run: yarn build --prod
       - run: ./deploy-dev.sh
 
