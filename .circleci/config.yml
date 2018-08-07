@@ -1,6 +1,8 @@
 version: 2
 jobs:
   master_jobs:
+    environment:
+      TZ: Asia/Tokyo
     docker:
       - image: circleci/node:8.11-browsers
     steps:
