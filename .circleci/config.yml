@@ -1,7 +1,6 @@
 version: 2
 jobs:
   build-jobs:
-    parallelism: 4
     environment:
       TZ: Asia/Tokyo
     docker:
