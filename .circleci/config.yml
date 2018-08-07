@@ -16,7 +16,6 @@ jobs:
       - run: echo "yarn install"
       - run: echo "yarn test"
       - run: echo "yarn build --prod"
-      - run: git tag prod_v_201808071200
       - run: ./deploy-prod.sh
   staging_jobs:
     docker:
@@ -25,7 +24,6 @@ jobs:
       - checkout
       - run: yarn install
       - run: yarn build --prod
-      - run: git tag stg_v_201808071200
       - run: ./deploy-dev.sh
 
 workflows:
