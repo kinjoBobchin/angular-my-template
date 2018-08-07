@@ -62,7 +62,10 @@ workflows:
   version: 2
   build-test-deploy-except-master:
     jobs:
-      - build-jobs
+      - build-jobs:
+          filters:
+            branches:
+              only: master
       - test-jobs:
           requires:
             - build-jobs
