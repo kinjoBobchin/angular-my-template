@@ -2,7 +2,7 @@ version: 2
 jobs:
   master_jobs:
     docker:
-      - image: circleci/node:8.10.0
+      - image: circleci/node:8.11-browsers
     steps:
       - checkout
       - run: echo "yarn install"
@@ -10,23 +10,22 @@ jobs:
       - run: ./hello.sh
   production_jobs:
     docker:
-      - image: circleci/node:8.10.0
+      - image: circleci/node:8.11-browsers
     steps:
       - checkout
       - run: echo "yarn install"
       - run: echo "yarn test"
       - run: echo "yarn build --prod"
       - run: bash ./deploy-prod.sh
+      - run: ./deploy-prod.sh
   staging_jobs:
     docker:
-      - image: circleci/node8.10.0
+      - image: circleci/node:8.11-browsers
     steps:
       - checkout
-      - run: echo "yarn install"
-      - run: echo "yarn test"
-      - run: echo "yarn build --prod"
-      - run: git tag stg_v_201808071200 && git push origin --tags
-      - run: echo "bash deploy-dev.sh"
+      - run: yarn install
+      - run: yarn build --prod
+      - run: ./deploy-dev.sh
 
 workflows:
   version: 2
