@@ -76,14 +76,10 @@ workflows:
             branches:
               only: master
       - production_jobs:
-          requires:
-            - build-jobs
           filters:
             branches:
               only: production
       - staging_jobs:
-          requires:
-            - build-jobs
           filters:
             branches:
               only: staging
