@@ -1,6 +1,7 @@
 version: 2
 jobs:
   build-jobs:
+    working_directory: ~/timestamp-app
     environment:
       TZ: Asia/Tokyo
     docker:
@@ -17,15 +18,28 @@ jobs:
           key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+  test-jobs:
+    working_directory: ~/timestamp-app
+    docker:
+      - image: circleci/node:8.11-browsers
+    steps:
+      - attach_workspace:
+          at: .
       - run: yarn test
 
   master_jobs:
+    working_directory: ~/timestamp-app
     docker:
       - image: circleci/node:8.11-browsers
     steps:
       - checkout
       - run: ./hello.sh
   production_jobs:
+    working_directory: ~/timestamp-app
     docker:
       - image: circleci/node:8.11-browsers
     steps:
@@ -53,6 +67,9 @@ workflows:
   build-test-deploy-except-master:
     jobs:
       - build-jobs
+      - test-jobs:
+          requires:
+            - build-jobs
       - master_jobs:
           requires:
             - build-jobs
