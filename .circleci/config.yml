@@ -24,7 +24,16 @@ jobs:
       - image: circleci/node:8.11-browsers
     steps:
       - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
       - run: echo "yarn install"
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
       - run: echo "yarn test"
       - run: echo "yarn build --prod"
       - run: ./deploy-prod.sh
@@ -33,7 +42,16 @@ jobs:
       - image: circleci/node:8.11-browsers
     steps:
       - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
       - run: yarn install
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
       - run: yarn build --prod
       - run: ./deploy-dev.sh
 
