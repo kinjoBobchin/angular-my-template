@@ -2,7 +2,7 @@ version: 2
 jobs:
   master_jobs:
     docker:
-      - image: circleci/node:8.10.0
+      - image: circleci/node:8.11-browsers
     steps:
       - checkout
       - run: echo "yarn install"
@@ -10,7 +10,7 @@ jobs:
       - run: ./hello.sh
   production_jobs:
     docker:
-      - image: circleci/node:8.10.0
+      - image: circleci/node:8.11-browsers
     steps:
       - checkout
       - run: echo "yarn install"
@@ -20,7 +20,7 @@ jobs:
       - run: echo "bash deploy-prod.sh"
   staging_jobs:
     docker:
-      - image: circleci/node8.10.0
+      - image: circleci/node:8.11-browsers
     steps:
       - checkout
       - run: echo "yarn install"
