@@ -10,12 +10,12 @@ jobs:
       - checkout
       - restore_cache:
           name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
+          key: yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
       - run: yarn install
+      - run: yarn build --prod
       - save_cache:
           name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
+          key: yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
       - persist_to_workspace:
@@ -37,36 +37,35 @@ jobs:
       - image: circleci/node:8.11-browsers
     steps:
       - checkout
+      - attach_workspace:
+          at: .
       - run: ./hello.sh
-  production_jobs:
+  deploy-prod:
     working_directory: ~/timestamp-app
     docker:
       - image: circleci/node:8.11-browsers
     steps:
       - checkout
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-      - run: yarn build --prod
+      - attach_workspace:
+          at: .
       - run: ./deploy-prod.sh
-  staging_jobs:
+  staging-deploy:
     docker:
       - image: circleci/node:8.11-browsers
     steps:
       - checkout
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
-      - run: yarn build --prod
+      - attach_workspace:
+          at: .
       - run: ./deploy-dev.sh
 
 workflows:
   version: 2
   build-test-deploy-except-master:
     jobs:
-      - build-jobs
+      - build-jobs:
+          filters:
+            branches:
+              only: master
       - test-jobs:
           requires:
             - build-jobs
@@ -76,15 +75,11 @@ workflows:
           filters:
             branches:
               only: master
-      - production_jobs:
-          requires:
-            - build-jobs
+      - deploy-prod:
           filters:
             branches:
               only: production
-      - staging_jobs:
-          requires:
-            - build-jobs
+      - staging-deploy:
           filters:
             branches:
               only: staging
