@@ -1,18 +1,44 @@
 version: 2
 jobs:
-  build:
+  master_jobs:
     docker:
-      - image: circleci/node:8.10.0
-
-    working_directory: ~/timestamp-app
-
+      - image: circleci/node:8.11-browsers
+    steps:
+      - checkout
+      - run: echo "yarn install"
+      - run: echo "yarn test"
+      - run: ./hello.sh
+  production_jobs:
+    docker:
+      - image: circleci/node:8.11-browsers
+    steps:
+      - checkout
+      - run: echo "yarn install"
+      - run: echo "yarn test"
+      - run: echo "yarn build --prod"
+      - run: ./deploy-prod.sh
+  staging_jobs:
+    docker:
+      - image: circleci/node:8.11-browsers
     steps:
       - checkout
       - run: yarn install
-      - run: yarn test
+      - run: yarn build --prod
+      - run: ./deploy-dev.sh
 
-    deployment:
-      staging:
-        branch: staging
-        heroku:
-          appname: timestamp-app-dev
+workflows:
+  version: 2
+  build-test-deploy-except-master:
+    jobs:
+      - master_jobs:
+          filters:
+            branches:
+              only: master
+      - production_jobs:
+          filters:
+            branches:
+              only: production
+      - staging_jobs:
+          filters:
+            branches:
+              only: staging
