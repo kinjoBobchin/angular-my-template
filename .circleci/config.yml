@@ -1,20 +1,35 @@
 version: 2
 jobs:
+  build-jobs:
+    environment:
+      TZ: Asia/Tokyo
+    docker:
+      - image: circleci/node:8.11-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run: yarn install
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - run: yarn test
+
   master_jobs:
     docker:
       - image: circleci/node:8.11-browsers
     steps:
       - checkout
-      - run: echo "yarn install"
-      - run: echo "yarn test"
       - run: ./hello.sh
   production_jobs:
     docker:
       - image: circleci/node:8.11-browsers
     steps:
       - checkout
-      - run: echo "yarn install"
-      - run: echo "yarn test"
       - run: echo "yarn build --prod"
       - run: ./deploy-prod.sh
   staging_jobs:
@@ -22,7 +37,6 @@ jobs:
       - image: circleci/node:8.11-browsers
     steps:
       - checkout
-      - run: yarn install
       - run: yarn build --prod
       - run: ./deploy-dev.sh
 
@@ -30,7 +44,10 @@ workflows:
   version: 2
   build-test-deploy-except-master:
     jobs:
+      - build-jobs
       - master_jobs:
+          requires:
+            - build-jobs
           filters:
             branches:
               only: master
