@@ -10,13 +10,12 @@ jobs:
       - checkout
       - restore_cache:
           name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
+          key: yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
       - run: yarn install
       - run: yarn build --prod
       - save_cache:
           name: Save Yarn Package Cache
-          key: yarn-packages-{{ checksum "yarn.lock" }}
+          key: yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache/yarn
       - persist_to_workspace:
@@ -41,7 +40,7 @@ jobs:
       - attach_workspace:
           at: .
       - run: ./hello.sh
-  production_jobs:
+  deploy-prod:
     working_directory: ~/timestamp-app
     docker:
       - image: circleci/node:8.11-browsers
@@ -49,16 +48,14 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
-      - run: yarn test
       - run: ./deploy-prod.sh
-  staging_jobs:
+  staging-deploy:
     docker:
       - image: circleci/node:8.11-browsers
     steps:
       - checkout
       - attach_workspace:
           at: .
-      - run: yarn test
       - run: ./deploy-dev.sh
 
 workflows:
@@ -75,11 +72,11 @@ workflows:
           filters:
             branches:
               only: master
-      - production_jobs:
+      - deploy-prod:
           filters:
             branches:
               only: production
-      - staging_jobs:
+      - staging-deploy:
           filters:
             branches:
               only: staging
