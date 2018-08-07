@@ -37,6 +37,8 @@ jobs:
       - image: circleci/node:8.11-browsers
     steps:
       - checkout
+      - attach_workspace:
+          at: .
       - run: ./hello.sh
   production_jobs:
     working_directory: ~/timestamp-app
@@ -44,10 +46,8 @@ jobs:
       - image: circleci/node:8.11-browsers
     steps:
       - checkout
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
+      - attach_workspace:
+          at: .
       - run: yarn build --prod
       - run: ./deploy-prod.sh
   staging_jobs:
@@ -55,10 +55,8 @@ jobs:
       - image: circleci/node:8.11-browsers
     steps:
       - checkout
-      - restore_cache:
-          name: Restore Yarn Package Cache
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
+      - attach_workspace:
+          at: .
       - run: yarn build --prod
       - run: ./deploy-dev.sh
 
