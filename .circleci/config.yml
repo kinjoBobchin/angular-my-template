@@ -62,7 +62,7 @@ workflows:
   version: 2
   build-test-deploy-except-master:
     jobs:
-      - build-jobs:
+      - build-jobs
       - test-jobs:
           requires:
             - build-jobs
