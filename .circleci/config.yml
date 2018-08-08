@@ -10,13 +10,14 @@ jobs:
       - checkout
       - restore_cache:
           name: Restore Yarn Package Cache
-          key: dependency-cache-{{ checksum "package-lock.json" }}
-      - run: npm install
-      - run: npm run build --prod
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+      - run: yarn install
+      - run: yarn build --prod
       - save_cache:
           name: Save Yarn Package Cache
-          key: dependency-cache-{{ checksum "package-lock.json" }}
+          key: dependency-cache-{{ checksum "yarn.lock" }}
           paths:
+            - ~/.cache/yarn
             -  ./node_modules
       - persist_to_workspace:
           root: .
