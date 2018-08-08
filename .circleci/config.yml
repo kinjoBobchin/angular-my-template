@@ -63,10 +63,12 @@ workflows:
   build-test-deploy-except-master:
     jobs:
       - build-jobs
-      - test-jobs
-      - master_jobs:
+      - test-jobs:
           requires:
             - build-jobs
+      - master_jobs:
+          requires:
+            - test-jobs
           filters:
             branches:
               only: master
