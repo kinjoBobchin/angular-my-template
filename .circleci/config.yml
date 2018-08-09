@@ -2,10 +2,10 @@ version: 2
 jobs:
   install-and-build:
     working_directory: ~/timestamp-app
-    environment:
-      TZ: Asia/Tokyo
     docker:
       - image: circleci/node:8.11-browsers
+        environment:
+          TZ: Asia/Tokyo
     steps:
       - checkout
       - restore_cache:
@@ -27,6 +27,8 @@ jobs:
     working_directory: ~/timestamp-app
     docker:
       - image: circleci/node:8.11-browsers
+        environment:
+          TZ: Asia/Tokyo
     steps:
       - attach_workspace:
           at: .
@@ -36,6 +38,8 @@ jobs:
     working_directory: ~/timestamp-app
     docker:
       - image: circleci/node:8.11-browsers
+        environment:
+          TZ: Asia/Tokyo
     steps:
       - checkout
       - attach_workspace:
@@ -45,6 +49,8 @@ jobs:
     working_directory: ~/timestamp-app
     docker:
       - image: circleci/node:8.11-browsers
+        environment:
+          TZ: Asia/Tokyo
     steps:
       - checkout
       - attach_workspace:
@@ -53,6 +59,8 @@ jobs:
   staging-jobs:
     docker:
       - image: circleci/node:8.11-browsers
+        environment:
+          TZ: Asia/Tokyo
     steps:
       - checkout
       - attach_workspace:
