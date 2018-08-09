@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build-jobs:
+  install-and-build:
     working_directory: ~/timestamp-app
     environment:
       TZ: Asia/Tokyo
@@ -23,7 +23,7 @@ jobs:
           root: .
           paths:
             - .
-  test-jobs:
+  test:
     working_directory: ~/timestamp-app
     docker:
       - image: circleci/node:8.11-browsers
@@ -32,7 +32,7 @@ jobs:
           at: .
       - run: yarn test
 
-  master_jobs:
+  master-jobs:
     working_directory: ~/timestamp-app
     docker:
       - image: circleci/node:8.11-browsers
@@ -41,7 +41,7 @@ jobs:
       - attach_workspace:
           at: .
       - run: ./hello.sh
-  deploy-prod:
+  production-jobs:
     working_directory: ~/timestamp-app
     docker:
       - image: circleci/node:8.11-browsers
@@ -50,7 +50,7 @@ jobs:
       - attach_workspace:
           at: .
       - run: ./deploy-prod.sh
-  deploy-staging:
+  staging-jobs:
     docker:
       - image: circleci/node:8.11-browsers
     steps:
@@ -63,26 +63,26 @@ workflows:
   version: 2
   build-test-deploy-except-master:
     jobs:
-      - build-jobs:
+      - install-and-build:
           filters:
             branches:
               ignore:
                 - staging
                 - production
-      - test-jobs:
+      - test:
           requires:
-            - build-jobs
-      - master_jobs:
+            - install-and-build
+      - master-jobs:
           requires:
-            - build-jobs
+            - install-and-build
           filters:
             branches:
               only: master
-      - deploy-prod:
+      - production-jobs:
           filters:
             branches:
               only: production
-      - deploy-staging:
+      - staging-jobs:
           filters:
             branches:
               only: staging
