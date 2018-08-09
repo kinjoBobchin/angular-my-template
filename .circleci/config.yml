@@ -1,11 +1,15 @@
 version: 2
+
+container: &container
+  working_directory: ~/timestamp-app
+  docker:
+    - image: circleci/node:8.11-browsers
+      environment:
+        TZ: Asia/Tokyo
+
 jobs:
   install-and-build:
-    working_directory: ~/timestamp-app
-    docker:
-      - image: circleci/node:8.11-browsers
-        environment:
-          TZ: Asia/Tokyo
+    <<: *container
     steps:
       - checkout
       - restore_cache:
@@ -23,44 +27,32 @@ jobs:
           root: .
           paths:
             - .
+
   test:
-    working_directory: ~/timestamp-app
-    docker:
-      - image: circleci/node:8.11-browsers
-        environment:
-          TZ: Asia/Tokyo
+    <<: *container
     steps:
       - attach_workspace:
           at: .
       - run: yarn test
 
   master-jobs:
-    working_directory: ~/timestamp-app
-    docker:
-      - image: circleci/node:8.11-browsers
-        environment:
-          TZ: Asia/Tokyo
+    <<: *container
     steps:
       - checkout
       - attach_workspace:
           at: .
       - run: ./hello.sh
+
   production-jobs:
-    working_directory: ~/timestamp-app
-    docker:
-      - image: circleci/node:8.11-browsers
-        environment:
-          TZ: Asia/Tokyo
+    <<: *container
     steps:
       - checkout
       - attach_workspace:
           at: .
       - run: ./deploy-prod.sh
+
   staging-jobs:
-    docker:
-      - image: circleci/node:8.11-browsers
-        environment:
-          TZ: Asia/Tokyo
+    <<: *container
     steps:
       - checkout
       - attach_workspace:
