@@ -69,6 +69,7 @@ workflows:
               ignore:
                 - staging
                 - production
+                - /^issues\/.*/
       - test:
           requires:
             - install-and-build
