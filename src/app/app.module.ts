@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TopToolbarComponent } from './top-toolbar/top-toolbar.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TopToolbarComponent
   ],
   imports: [
     BrowserModule,
