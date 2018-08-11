@@ -1,3 +1,4 @@
+import { FAVORITES } from './favorite-mock-lists';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./favorite-lists.component.sass']
 })
 export class FavoriteListsComponent implements OnInit {
+  favorites = FAVORITES;
+
   constructor() {}
 
   ngOnInit() {}
