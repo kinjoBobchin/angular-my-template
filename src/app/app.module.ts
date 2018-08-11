@@ -6,9 +6,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TopToolbarComponent } from './top-toolbar/top-toolbar.component';
+import { FavoriteListsComponent } from './favorite-lists/favorite-lists.component';
 
 @NgModule({
-  declarations: [AppComponent, TopToolbarComponent],
+  declarations: [AppComponent, TopToolbarComponent, FavoriteListsComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
