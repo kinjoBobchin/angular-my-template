@@ -1,0 +1,5 @@
+mat-list
+  h2(mat-subheader) Here are some links to help you start:
+  mat-list-item(*ngFor="let favorite of favorites")
+    mat-icon(mat-list-icon) launch
+    a(mat-icon-button target="_blank" href="{{ favorite.url }}") {{ favorite.title }}
