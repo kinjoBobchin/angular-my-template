@@ -5,9 +5,10 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test",
+    "build:prod": "ng build --aot --prod",
     "lint": "ng lint",
-    "cypress": "./node_modules/.bin/cypress open",
+    "test": "cypress run --spec cypress/integration/test.spec.ts",
+    "test:e2e": "./node_modules/.bin/cypress open",
     "postinstall": "node ./ng-add-pug-loader.js"
   },
   "private": true,
