@@ -41,7 +41,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
-      - run: ./deploy-scripts/create-mastertag.sh
+      - run: ./scripts/create-mastertag.sh
 
   production-jobs:
     <<: *container
@@ -49,7 +49,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
-      - run: ./deploy-scripts/deploy-prod.sh
+      - run: ./scripts/deploy-prod.sh
 
   staging-jobs:
     <<: *container
@@ -57,7 +57,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
-      - run: ./deploy-scripts/deploy-dev.sh
+      - run: ./scripts/deploy-dev.sh
 
 workflows:
   version: 2
