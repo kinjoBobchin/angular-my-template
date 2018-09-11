@@ -8,12 +8,12 @@ const port = process.env.PORT || 8080;
 // GZip
 app.use(compression());
 
-app.use(express.static(__dirname + '/../dist'));
+app.use(express.static(__dirname + '/../dist/angular-template'));
 
 app.listen(port);
 
 app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/../dist/index.html'));
+  res.sendFile(path.join(__dirname + '/../dist/angular-template/index.html'));
 });
 
 console.log(`Server listening on ${port}`);
