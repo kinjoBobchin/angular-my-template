@@ -41,3 +41,4 @@ Thumbs.db
 # cypress まだスナップショットをアップロードしない
 /cypress/videos/**
 /cypress/screenshots/**
+.envrc
