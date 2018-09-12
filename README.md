@@ -1,6 +1,6 @@
-# HittingTimestamp
+# Angular-My-Template
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/kinjoBobchin/timestamp-app.svg)](https://greenkeeper.io/)
+[![Greenkeeper badge](https://badges.greenkeeper.io/kinjoBobchin/angular-my-template.svg)](https://greenkeeper.io/)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.2.
 
