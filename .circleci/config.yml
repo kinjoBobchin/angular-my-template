@@ -1,7 +1,7 @@
 version: 2
 
 container: &container
-  working_directory: ~/timestamp-app
+  working_directory: ~/angular-my-template
   docker:
     - image: circleci/node:8.11-browsers
       environment:
