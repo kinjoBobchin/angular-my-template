@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-template": {
+    "angular-my-template": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular-template",
+            "outputPath": "dist/angular-my-template",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -50,18 +50,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-template:build"
+            "browserTarget": "angular-my-template:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular-template:build:production"
+              "browserTarget": "angular-my-template:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-template:build"
+            "browserTarget": "angular-my-template:build"
           }
         },
         "test": {
@@ -90,7 +90,7 @@
         }
       }
     },
-    "angular-template-e2e": {
+    "angular-my-template-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -98,7 +98,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "angular-template:serve"
+            "devServerTarget": "angular-my-template:serve"
           }
         },
         "lint": {
@@ -111,5 +111,5 @@
       }
     }
   },
-  "defaultProject": "angular-template"
+  "defaultProject": "angular-my-template"
 }

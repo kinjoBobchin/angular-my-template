@@ -1,5 +1,5 @@
 {
-  "name": "angular-template",
+  "name": "angular-my-template",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "test": "cypress run --spec 'src/app/**/*.spec.ts'",
     "test:e2e": "./node_modules/.bin/cypress open",
-    "postinstall": "node ./ng-add-pug-loader.js"
+    "postinstall": "node ./ng-add-pug-loader.js && ng build --aot --prod"
   },
   "engines": {
     "node": "9.11.1",
