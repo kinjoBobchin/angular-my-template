@@ -9,7 +9,7 @@
     "@angular-devkit/core" "0.8.1"
     rxjs "~6.2.0"
 
-"@angular-devkit/build-angular@~0.8.0":
+"@angular-devkit/build-angular@0.8.1":
   version "0.8.1"
   resolved "https://registry.yarnpkg.com/@angular-devkit/build-angular/-/build-angular-0.8.1.tgz#2ab7e7b584ecbc2eb43afd438de345e4a5ce2325"
   dependencies:
