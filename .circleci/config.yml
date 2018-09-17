@@ -33,6 +33,7 @@ jobs:
     steps:
       - attach_workspace:
           at: .
+      - run: yarn ng:serve
       - run: yarn test
 
   master-jobs:
