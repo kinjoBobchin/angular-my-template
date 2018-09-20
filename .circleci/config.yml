@@ -34,8 +34,11 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-      - run: yarn cypress:install
-      - run: yarn test:wait & yarn ng:serve
+      - run:
+          command: yarn cypress:install
+      - run:
+          command: yarn test:wait & yarn ng:serve
+          no_output_timeout: 100s
 
   master-jobs:
     <<: *container
