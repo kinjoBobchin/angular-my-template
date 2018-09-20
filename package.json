@@ -37,6 +37,7 @@
     "ramda": "^0.25.0",
     "rxjs": "^6.2.2",
     "typescript": "2.9.2",
+    "wait-on": "^3.0.1",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
