@@ -51,7 +51,7 @@
     "@types/node": "~10.10.0",
     "apply-loader": "^2.0.0",
     "codelyzer": "~4.4.2",
-    "cypress": "^3.0.3",
+    "cypress": "^3.1.0",
     "pug": "^2.0.3",
     "pug-loader": "^2.4.0",
     "puppeteer": "^1.6.2",
