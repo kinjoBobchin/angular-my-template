@@ -33,7 +33,7 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-      - run: yarn ng:serve & yarn wait
+      - run: yarn ng:serve & wait
       - run: yarn test
 
   master-jobs:
@@ -75,7 +75,7 @@ workflows:
             - install-and-build
       - master-jobs:
           requires:
-            - install-and-build
+            - test
           filters:
             branches:
               only: master
