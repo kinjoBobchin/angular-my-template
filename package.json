@@ -10,6 +10,7 @@
     "lint": "ng lint",
     "test": "cypress run --spec 'src/app/**/*.spec.ts'",
     "test:e2e": "./node_modules/.bin/cypress open",
+    "wait": "wait-on http://localhost:8080",
     "postinstall": "node ./ng-add-pug-loader.js && ng build --aot --prod"
   },
   "private": true,
