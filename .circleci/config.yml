@@ -34,7 +34,6 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-      - run: yarn cypress:install
       - run: yarn test:wait & yarn ng:serve
 
   master-jobs:
