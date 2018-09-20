@@ -6,6 +6,7 @@ container: &container
     - image: circleci/node:8.11-browsers
       environment:
         TZ: Asia/Tokyo
+        TERM: xterm
 
 jobs:
   install-and-build:
@@ -15,8 +16,8 @@ jobs:
       - restore_cache:
           name: Restore Yarn Package Cache
           key: dependency-cache-{{ checksum "yarn.lock" }}
-      - run: yarn install
-      - run: yarn build --prod
+      - run: yarn install --frozen-lockfile
+      - run: yarn build:prod
       - save_cache:
           name: Save Yarn Package Cache
           key: dependency-cache-{{ checksum "yarn.lock" }}
