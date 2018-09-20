@@ -35,10 +35,12 @@ jobs:
       - attach_workspace:
           at: .
       - run:
+          command: yarn ng:serve
+          background: true
+      - run:
           command: yarn cypress:install
       - run:
-          command: yarn test:wait & yarn ng:serve
-          no_output_timeout: 100s
+          command: yarn test:wait
 
   master-jobs:
     <<: *container
