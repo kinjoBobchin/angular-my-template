@@ -33,7 +33,7 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-      - run: yarn ng:serve & yarn test
+      - run: yarn ng:serve & wait-on http://localhost:8080 & yarn test
 
   master-jobs:
     <<: *container
