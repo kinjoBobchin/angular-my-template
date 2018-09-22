@@ -3,7 +3,7 @@ version: 2
 container: &container
   working_directory: ~/angular-my-template
   docker:
-    - image: cypress/base:8
+    - image: circleci/node:8.11-browsers
       environment:
         TZ: Asia/Tokyo
         TERM: xterm
@@ -35,8 +35,10 @@ jobs:
       - attach_workspace:
           at: .
       - run:
-          command: yarn ng:serve
+          command: yarn serve
           background: true
+      - run:
+          command: yarn cypress:install
       - run:
           command: yarn test:wait
 

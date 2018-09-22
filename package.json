@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "ng": "ng",
-    "ng:serve": "ng serve",
+    "serve": "ng serve",
     "start": "node server",
     "build": "ng build",
     "build:prod": "ng build --aot --prod",
