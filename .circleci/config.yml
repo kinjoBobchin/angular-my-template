@@ -70,12 +70,7 @@ workflows:
   version: 2
   build-test-deploy-except-master:
     jobs:
-      - install-and-build:
-          filters:
-            branches:
-              ignore:
-                - staging
-                - production
+      - install-and-build
       - test:
           requires:
             - install-and-build
