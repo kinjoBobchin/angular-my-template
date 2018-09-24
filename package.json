@@ -14,10 +14,6 @@
     "test:wait": "wait-on http://localhost:4200 && yarn test",
     "postinstall": "node ./ng-add-pug-loader.js && ng build --aot --prod"
   },
-  "engines": {
-    "node": "9.11.1",
-    "npm": "6.4.0"
-  },
   "private": true,
   "dependencies": {
     "@angular/animations": "^6.1.1",
