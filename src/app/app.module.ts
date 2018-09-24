@@ -28,7 +28,9 @@ import { SideNavComponent } from './side-nav/side-nav.component';
     FlexLayoutModule,
     MatToolbarModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatButtonModule,
+    MatSidenavModule
   ],
   providers: [],
   bootstrap: [AppComponent]
