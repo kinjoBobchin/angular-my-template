@@ -1,14 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-side-nav',
   templateUrl: './side-nav.component.pug',
   styleUrls: ['./side-nav.component.sass']
 })
-export class SideNavComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {
-    this.title = 'app';
-  }
+export class SideNavComponent {
+  title = 'app';
 }
