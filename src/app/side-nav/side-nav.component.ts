@@ -2,14 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-side-nav',
-  templateUrl: './side-nav.component.html',
+  templateUrl: './side-nav.component.pug',
   styleUrls: ['./side-nav.component.sass']
 })
 export class SideNavComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }
