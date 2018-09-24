@@ -1,6 +1,8 @@
 #!/bin/bash
 
+# enviroment variables
 NOW=$(date +'%Y_%m%d_%H%M')
 BRANCH_NAME=${CIRCLE_BRANCH}
-git tag $BRANCH_NAME_$NOW && git push origin --tags
-echo $BRANCH_NAME
+
+tag_name="${BRANCH_NAME}_${NOW}"
+git tag $tag_name && git push origin --tags
