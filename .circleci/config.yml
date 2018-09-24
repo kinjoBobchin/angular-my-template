@@ -68,7 +68,7 @@ jobs:
 
 workflows:
   version: 2
-  build-test-deploy-except-master:
+  build-and-test:
     jobs:
       - install-and-build
       - test:
@@ -81,10 +81,14 @@ workflows:
             branches:
               only: master
       - production-jobs:
+          requires:
+            - test
           filters:
             branches:
               only: production
       - staging-jobs:
+          requires:
+            - test
           filters:
             branches:
               only: staging
