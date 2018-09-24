@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class SideNavComponent implements OnInit {
   constructor() {}
 
-  ngOnInit(private vm = this) {
-    vm.title = 'app';
+  ngOnInit() {
+    this.title = 'app';
   }
 }
