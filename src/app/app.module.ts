@@ -1,8 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
+import {
+  MatToolbarModule,
+  MatIconModule,
+  MatListModule,
+  MatSidenavModule,
+  MatButtonModule
+} from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
@@ -12,7 +16,12 @@ import { FavoriteListsComponent } from './favorite-lists/favorite-lists.componen
 import { SideNavComponent } from './side-nav/side-nav.component';
 
 @NgModule({
-  declarations: [AppComponent, TopToolbarComponent, FavoriteListsComponent, SideNavComponent],
+  declarations: [
+    AppComponent,
+    TopToolbarComponent,
+    FavoriteListsComponent,
+    SideNavComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
