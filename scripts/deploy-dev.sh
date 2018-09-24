@@ -1,6 +1,7 @@
 #!/bin/bash
 
+# enviroment variables
 NOW=$(date +'%Y_%m%d_%H%M')
+BRANCH_NAME=${CIRCLE_BRANCH}
 
-git tag dev_$NOW && git push origin --tags
-echo "hello from " HEROKU_APP_NAME_DEV
+git tag $BRANCH_NAME_$NOW && git push origin --tags

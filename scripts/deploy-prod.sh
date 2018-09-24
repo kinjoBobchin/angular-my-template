@@ -1,6 +1,7 @@
 #!/bin/bash
 
+# enviroment variables
 NOW=$(date +'%Y_%m%d_%H%M')
+BRANCH_NAME=${CIRCLE_BRANCH}
 
-git tag prod_$NOW && git push origin --tags
-echo "hello from deploy-prod.sh"
+git tag $BRANCH_NAME_$NOW && git push origin --tags
