@@ -13,6 +13,7 @@ export class TopToolbarComponent implements OnInit {
   }
 
   onMenuClicked() {
-    return (this.menuClickedStatus = !this.menuClickedStatus);
+    return (this.sideNavStatusService.isOpen = !this.sideNavStatusService
+      .isOpen);
   }
 }
