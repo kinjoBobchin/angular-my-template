@@ -1,24 +1,36 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
+import {
+  MatToolbarModule,
+  MatIconModule,
+  MatListModule,
+  MatSidenavModule,
+  MatButtonModule
+} from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TopToolbarComponent } from './top-toolbar/top-toolbar.component';
-import { FavoriteListsComponent } from './favorite-lists/favorite-lists.component';
+import { TopToolbarComponent } from './component/top-toolbar/top-toolbar.component';
+import { FavoriteListsComponent } from './component/favorite-lists/favorite-lists.component';
+import { SideNavComponent } from './component/side-nav/side-nav.component';
 
 @NgModule({
-  declarations: [AppComponent, TopToolbarComponent, FavoriteListsComponent],
+  declarations: [
+    AppComponent,
+    TopToolbarComponent,
+    FavoriteListsComponent,
+    SideNavComponent
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
     MatToolbarModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatButtonModule,
+    MatSidenavModule
   ],
   providers: [],
   bootstrap: [AppComponent]
