@@ -43,7 +43,7 @@
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "0.8.5",
+    "@angular-devkit/build-angular": "0.10.0",
     "@angular/language-service": "^6.1.9",
     "@bahmutov/add-typescript-to-cypress": "^2.0.0",
     "@types/jasmine": "~2.8.6",
