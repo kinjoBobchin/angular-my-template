@@ -11,7 +11,7 @@
     "test": "cypress run --spec 'src/app/**/*.spec.ts'",
     "test:e2e": "./node_modules/.bin/cypress open",
     "cypress:install": "cypress install",
-    "test:wait": "wait-on http://localhost:4200 && yarn test",
+    "test:wait": "wait-on http-get://localhost:4200 && yarn test",
     "postinstall": "node ./ng-add-pug-loader.js && ng build --aot --prod"
   },
   "engines": {
