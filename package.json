@@ -1,6 +1,6 @@
 {
   "name": "angular-my-template",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "scripts": {
     "ng": "ng",
     "serve": "ng serve",
@@ -12,7 +12,9 @@
     "test:e2e": "./node_modules/.bin/cypress open",
     "cypress:install": "cypress install",
     "test:wait": "wait-on http-get://localhost:4200 && yarn test",
-    "postinstall": "node ./ng-add-pug-loader.js && ng build --aot --prod"
+    "postinstall": "node ./ng-add-pug-loader.js && ng build --aot --prod",
+    "deploy:build": "ng build --prod --base-href 'https://kinjobobchin.github.io/angular-my-template/'",
+    "deploy": "angular-cli-ghpages --dir='dist/angular-my-template'"
   },
   "engines": {
     "node": "<= 10.x"
@@ -53,6 +55,7 @@
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~10.12.0",
+    "angular-cli-ghpages": "^0.5.3",
     "apply-loader": "^2.0.0",
     "codelyzer": "^4.5.0",
     "cypress": "^3.1.0",

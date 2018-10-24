@@ -1,16 +1,18 @@
-version: 2
+version: 2.1
 
-container: &container
-  working_directory: ~/angular-my-template
-  docker:
-    - image: circleci/node:8.11-browsers
-      environment:
-        TZ: Asia/Tokyo
-        TERM: xterm
+executors:
+  container:
+    working_directory: ~/angular-my-template
+    docker:
+      - image: circleci/node:8.11-browsers
+        environment:
+          TZ: Asia/Tokyo
+          TERM: xterm
 
 jobs:
   install-and-build:
-    <<: *container
+    executor:
+      name: container
     steps:
       - checkout
       - restore_cache:
@@ -30,7 +32,8 @@ jobs:
             - .
 
   test:
-    <<: *container
+    executor:
+      name: container
     steps:
       - attach_workspace:
           at: .
@@ -43,7 +46,8 @@ jobs:
           command: yarn test:wait
 
   master-jobs:
-    <<: *container
+    executor:
+      name: container
     steps:
       - checkout
       - attach_workspace:
@@ -51,7 +55,8 @@ jobs:
       - run: ./scripts/create-mastertag.sh
 
   production-jobs:
-    <<: *container
+    executor:
+      name: container
     steps:
       - checkout
       - attach_workspace:
@@ -59,7 +64,8 @@ jobs:
       - run: ./scripts/deploy-prod.sh
 
   staging-jobs:
-    <<: *container
+    executor:
+      name: container
     steps:
       - checkout
       - attach_workspace:
