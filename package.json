@@ -35,7 +35,7 @@
     "@angular/platform-browser": "^7.0.0",
     "@angular/platform-browser-dynamic": "^7.0.0",
     "@angular/router": "^7.0.0",
-    "@types/ramda": "^0.25.38",
+    "@types/ramda": "^0.26.0",
     "compression": "^1.7.3",
     "core-js": "^2.5.4",
     "express": "^4.16.3",
