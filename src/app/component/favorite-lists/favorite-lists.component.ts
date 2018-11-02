@@ -1,4 +1,4 @@
-import { FAVORITES } from './favorite-mock-lists';
+import { FAVORITES } from './favorite-lists.mock';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
