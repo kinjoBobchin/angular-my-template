@@ -5,7 +5,8 @@ import {
   MatIconModule,
   MatListModule,
   MatSidenavModule,
-  MatButtonModule
+  MatButtonModule,
+  MatCardModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -36,6 +37,7 @@ import { SelfIntroComponent } from './component/self-intro/self-intro.component'
     MatListModule,
     MatButtonModule,
     MatSidenavModule,
+    MatCardModule,
     AppRoutingModule
   ],
   providers: [],
