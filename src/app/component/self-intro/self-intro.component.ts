@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { introData } from './self-intro.mock';
 
 @Component({
   selector: 'app-self-intro',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SelfIntroComponent implements OnInit {
 
-  constructor() { }
+  constructor() {}
+
+  selfData = introData;
 
   ngOnInit() {
   }

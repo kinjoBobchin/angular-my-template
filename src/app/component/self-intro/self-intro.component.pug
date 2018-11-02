@@ -1,1 +1,21 @@
-p self-intro works!
+mat-card.intro-card
+  mat-card-header
+    .card-header-image(mat-card-avatar)
+    mat-card-title Kinjo Yan
+    mat-card-subtitle Web Enginer
+  img(mat-card-image src="assets/images/pug.png" alt='Photo of bonobono')
+  mat-card-content
+    mat-list
+      mat-list-item
+        mat-icon(mat-list-icon) cake
+        span(mat-icon-button) {{ selfData.birthyear }}
+      mat-list-item
+        mat-icon(mat-list-icon) person
+        span(mat-icon-button) 職業：{{ selfData.job }}
+      mat-list-item
+        mat-icon(mat-list-icon) place
+        span(mat-icon-button) {{ selfData.graduate }}
+      mat-list-item
+        mat-icon(mat-list-icon) chat_bubble
+        span(mat-icon-button) {{ selfData.graduate }}
+
