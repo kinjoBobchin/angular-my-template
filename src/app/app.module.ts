@@ -16,6 +16,7 @@ import { FavoriteListsComponent } from './component/favorite-lists/favorite-list
 import { SideNavComponent } from './component/side-nav/side-nav.component';
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
+import { SelfIntroComponent } from './component/self-intro/self-intro.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { DashboardComponent } from './component/dashboard/dashboard.component';
     TopToolbarComponent,
     FavoriteListsComponent,
     SideNavComponent,
-    DashboardComponent
+    DashboardComponent,
+    SelfIntroComponent
   ],
   imports: [
     BrowserModule,
