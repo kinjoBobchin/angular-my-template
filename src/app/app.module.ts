@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TopToolbarComponent } from './component/top-toolbar/top-toolbar.component';
 import { FavoriteListsComponent } from './component/favorite-lists/favorite-lists.component';
 import { SideNavComponent } from './component/side-nav/side-nav.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { SideNavComponent } from './component/side-nav/side-nav.component';
     MatIconModule,
     MatListModule,
     MatButtonModule,
-    MatSidenavModule
+    MatSidenavModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
