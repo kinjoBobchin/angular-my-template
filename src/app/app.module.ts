@@ -15,13 +15,15 @@ import { TopToolbarComponent } from './component/top-toolbar/top-toolbar.compone
 import { FavoriteListsComponent } from './component/favorite-lists/favorite-lists.component';
 import { SideNavComponent } from './component/side-nav/side-nav.component';
 import { AppRoutingModule } from './app-routing.module';
+import { DashboardComponent } from './component/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopToolbarComponent,
     FavoriteListsComponent,
-    SideNavComponent
+    SideNavComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
