@@ -4,7 +4,7 @@ describe('Hello Angular', () => {
   });
 
   it('should display welcome message', () => {
-    cy.get('app-root h1').contains('Welcome to app!');
+    cy.get('app-root h1').contains('Hello, my name is Yan!');
   });
 
   // it('has 3 links', () => {
