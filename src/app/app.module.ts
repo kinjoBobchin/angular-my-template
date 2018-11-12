@@ -5,7 +5,8 @@ import {
   MatIconModule,
   MatListModule,
   MatSidenavModule,
-  MatButtonModule
+  MatButtonModule,
+  MatCardModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -14,13 +15,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TopToolbarComponent } from './component/top-toolbar/top-toolbar.component';
 import { FavoriteListsComponent } from './component/favorite-lists/favorite-lists.component';
 import { SideNavComponent } from './component/side-nav/side-nav.component';
+import { AppRoutingModule } from './app-routing.module';
+import { DashboardComponent } from './component/dashboard/dashboard.component';
+import { SelfIntroComponent } from './component/self-intro/self-intro.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopToolbarComponent,
     FavoriteListsComponent,
-    SideNavComponent
+    SideNavComponent,
+    DashboardComponent,
+    SelfIntroComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +36,9 @@ import { SideNavComponent } from './component/side-nav/side-nav.component';
     MatIconModule,
     MatListModule,
     MatButtonModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatCardModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
