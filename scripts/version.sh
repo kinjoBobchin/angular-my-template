@@ -33,16 +33,16 @@ echo 変更前のバージョン$CURRENT_PKG_VERSION
 # package: update a package
 
 ##############################################
-# + 0.0.0 ( npm version patch --allow-same-version=true )
+# + 0.0.0 ( npm version patch)
 ##############################################
 # プレフィクスなし
 
 commit_log=$(git log master..HEAD --oneline | awk '{print $2}') # masterから最新のコミットまでのコミットログを取得し、コメントのみ抽出
 # echo $commit_log
 case $commit_log in
-  *feat* | *refactor* | *perf* | *new* | *delete* |*fix* ) npm version minor --git-tag-version=false ;;
-  *fix* | *chore* | *test* | *docs* | *style* | ^package* ) npm version patch --git-tag-version=false ;;
-  * ) npm version patch --allow-same-version=true ;;
+  *feat* | *refactor* | *perf* | *new* | *delete* | *fix* ) npm version minor --git-tag-version=false;;
+  *fix* | *chore* | *test* | *docs* | *style* | *package* ) npm version patch --git-tag-version=false ;;
+  * ) echo "今回、バージョン変更はなしです";;
 esac
 
 CURRENT_PKG_VERSION=`node -pe 'require("./package.json").version'`
