@@ -45,6 +45,15 @@ jobs:
       - run:
           command: yarn test:wait
 
+  version-update:
+    executor:
+      name: container
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          command: ./scripts/version.sh
+
   master-jobs:
     executor:
       name: container
@@ -80,6 +89,9 @@ workflows:
       - test:
           requires:
             - install-and-build
+      - version-update:
+          requires:
+            - test
       - master-jobs:
           requires:
             - test
@@ -88,13 +100,13 @@ workflows:
               only: master
       - production-jobs:
           requires:
-            - test
+            - version-update
           filters:
             branches:
               only: production
       - staging-jobs:
           requires:
-            - test
+            - version-update
           filters:
             branches:
               only: staging
