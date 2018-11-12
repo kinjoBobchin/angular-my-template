@@ -32,11 +32,17 @@ echo 変更前のバージョン$CURRENT_PKG_VERSION
 # style: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
 # package: update a package
 
+##############################################
+# + 0.0.0 ( npm version patch --allow-same-version=true )
+##############################################
+# プレフィクスなし
+
 commit_log=$(git log master..HEAD --oneline | awk '{print $2}') # masterから最新のコミットまでのコミットログを取得し、コメントのみ抽出
 # echo $commit_log
 case $commit_log in
-  *feat* | *refactor* | *perf* | *new* | *delete* |*fix* ) echo "マイナーチェンジ" ;;
-  *fix* | *chore* | *test* | *docs* | *style* | ^package* ) echo "パッチ" ;;
+  *feat* | *refactor* | *perf* | *new* | *delete* |*fix* ) echo npm version minor --git-tag-version=false ;;
+  *fix* | *chore* | *test* | *docs* | *style* | ^package* ) echo npm version patch --git-tag-version=false ;;
+  * ) echo npm version patch --allow-same-version=true ;;
 esac
 
 CURRENT_PKG_VERSION=`node -pe 'require("./package.json").version'`
