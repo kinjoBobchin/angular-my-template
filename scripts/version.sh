@@ -20,6 +20,8 @@
 # package: update a package
 # delete: delete the file
 
+commit_log=$(git log master..HEAD --oneline) # masterから最新のコミットまでのコミットログを取得
+echo $commit_log
 
 
 CURRENT_PKG_VERSION=`node -pe 'require("./package.json").version'`
