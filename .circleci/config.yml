@@ -17,12 +17,12 @@ jobs:
       - checkout
       - restore_cache:
           name: Restore Yarn Package Cache
-          key: dependency-cache-{{ checksum "yarn.lock" }}
+          key: dependency-cache-{{ checksum "yarn.lock" }}{{ .Branch }}
       - run: yarn install
       - run: yarn build:prod
       - save_cache:
           name: Save Yarn Package Cache
-          key: dependency-cache-{{ checksum "yarn.lock" }}
+          key: dependency-cache-{{ checksum "yarn.lock" }}{{ .Branch }}
           paths:
             - ~/.cache
             - ./node_modules
@@ -44,6 +44,15 @@ jobs:
           command: yarn cypress:install
       - run:
           command: yarn test:wait
+
+  version-update:
+    executor:
+      name: container
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          command: ./scripts/version.sh
 
   master-jobs:
     executor:
@@ -80,6 +89,9 @@ workflows:
       - test:
           requires:
             - install-and-build
+      - version-update:
+          requires:
+            - test
       - master-jobs:
           requires:
             - test
@@ -88,13 +100,13 @@ workflows:
               only: master
       - production-jobs:
           requires:
-            - test
+            - version-update
           filters:
             branches:
               only: production
       - staging-jobs:
           requires:
-            - test
+            - version-update
           filters:
             branches:
               only: staging

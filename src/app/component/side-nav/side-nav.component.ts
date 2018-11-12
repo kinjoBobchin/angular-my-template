@@ -9,8 +9,6 @@ import { SideNavStatusService } from 'src/app/service/side-nav-status/side-nav-s
 export class SideNavComponent {
   constructor(private sideNavStatusService: SideNavStatusService) {}
 
-  title = 'app';
-
   get sideNavStatus() {
     return this.sideNavStatusService.isOpen;
   }
