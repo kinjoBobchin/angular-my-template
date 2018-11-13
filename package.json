@@ -1,6 +1,6 @@
 {
   "name": "angular-my-template",
-  "version": "0.1.1",
+  "version": "0.1.6",
   "scripts": {
     "ng": "ng",
     "serve": "ng serve",
@@ -54,7 +54,7 @@
     "@bahmutov/add-typescript-to-cypress": "^2.0.0",
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
-    "@types/node": "~10.12.0",
+    "@types/node": "^10.12.6",
     "angular-cli-ghpages": "^0.5.3",
     "apply-loader": "^2.0.0",
     "codelyzer": "^4.5.0",
