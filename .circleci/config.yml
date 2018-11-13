@@ -90,6 +90,9 @@ workflows:
           requires:
             - install-and-build
       - version-update:
+          filters:
+            branches:
+              - master
           requires:
             - test
       - master-jobs:
