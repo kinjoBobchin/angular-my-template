@@ -82,7 +82,6 @@ jobs:
       - run: ./scripts/deploy-dev.sh
 
 workflows:
-  version: 2
   build-and-test:
     jobs:
       - install-and-build
@@ -92,7 +91,7 @@ workflows:
       - version-update:
           filters:
             branches:
-              - master
+              only: master
           requires:
             - test
       - master-jobs:
