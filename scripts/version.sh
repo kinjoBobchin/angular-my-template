@@ -33,7 +33,7 @@
 ##############################################
 # プレフィクスなし
 
-CURRENT_PKG_VERSION=`node -pe 'require("./package.json").version'`
+CURRENT_PKG_VERSION=$(node -pe 'require("./package.json").version')
 echo 変更前のバージョン$CURRENT_PKG_VERSION
 
 commit_log=$(git log master..HEAD --oneline | awk '{print $2}') # masterから最新のコミットまでのコミットログを取得し、コメントのみ抽出
@@ -44,8 +44,8 @@ case $commit_log in
   * ) echo "今回、バージョン変更はなしです";;
 esac
 
-CURRENT_PKG_VERSION=`node -pe 'require("./package.json").version'`
-echo 変更後のバージョン$CURRENT_PKG_VERSION
+BEFORE_PKG_VERSION=$(node -pe 'require("./package.json").version')
+echo 変更後のバージョン$BEFORE_PKG_VERSION
 
 # タグが10個以上生成されたら、古いタグを削除
 PKG_VERSIONS=$(git tag -l [0-9]*.[0-9]*.[0-9]*) # 1.0.0, 1.12.2, 12.0.12 ・・・
