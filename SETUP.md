@@ -17,12 +17,7 @@ brew --version
 ## brew をインストールしたら入れておく
 
 ```bash
-brew install tree
-brew install fish
-brew install yarn
-brew install angular-cli
-brew install direnv
-brew install nodebrew
+brew install tree fish yarn angular-cli direnv nodebrew
 ```
 
 ### fish を  デフォルトシェルと認識させておく
