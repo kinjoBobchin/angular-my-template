@@ -1,5 +1,5 @@
-mat-list
+mat-list.favorites-list(cdkDropList (cdkDropListDropped)="drop($event)")
   h2(mat-subheader) Here are some links to help you start:
-  mat-list-item(*ngFor="let favorite of favorites")
+  mat-list-item.favorites-item(*ngFor="let favorite of favorites" cdkDrag)
     mat-icon(mat-list-icon) launch
     a(mat-icon-button target="_blank" href="{{ favorite.url }}") {{ favorite.title }}
