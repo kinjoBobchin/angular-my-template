@@ -15,6 +15,7 @@
     "postinstall": "node ./ng-add-pug-loader.js && ng build --aot --prod",
     "deploy:build": "ng build --prod --base-href 'https://kinjobobchin.github.io/angular-my-template/'",
     "deploy": "angular-cli-ghpages --dir='dist/angular-my-template'",
+    "update": "yarn run ng update @angular/cli; and yarn run ng update --all",
     "direnvify": "node direnvify.ts"
   },
   "engines": {
