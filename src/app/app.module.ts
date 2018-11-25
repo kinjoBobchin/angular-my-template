@@ -9,6 +9,7 @@ import {
   MatCardModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -38,6 +39,7 @@ import { SelfIntroComponent } from './component/self-intro/self-intro.component'
     MatButtonModule,
     MatSidenavModule,
     MatCardModule,
+    DragDropModule,
     AppRoutingModule
   ],
   providers: [],
