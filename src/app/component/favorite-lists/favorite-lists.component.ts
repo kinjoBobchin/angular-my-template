@@ -1,5 +1,6 @@
 import { FAVORITES } from './favorite-lists.mock';
 import { Component, OnInit } from '@angular/core';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-favorite-lists',
@@ -12,4 +13,8 @@ export class FavoriteListsComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.favorites, event.previousIndex, event.currentIndex);
+  }
 }
